@@ -154,7 +154,22 @@
     </div>
 
     <script>
+         function fetchData() {
+            google.script.run.withSuccessHandler(displayData).getData();
+        }
 
+        function displayData(data) {
+            const tableBody = document.getElementById('data-body');
+            data.forEach(row => {
+                const newRow = document.createElement('tr');
+                const cell = document.createElement('td');
+                cell.textContent = row[0]; // 一列目のデータを表示
+                newRow.appendChild(cell);
+                tableBody.appendChild(newRow);
+            });
+        }
+
+        window.onload = fetchData; // ページが読み込まれたときにデータを取得
     </script>
 </body>
 
